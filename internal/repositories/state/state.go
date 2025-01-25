@@ -1,9 +1,11 @@
 package state
 
+import "context"
+
 type State map[string]any
 
 type Repository interface {
-	Save(key string, data State) error
+	Save(ctx context.Context, key string, data State) error
 
-	Pull(key string) (State, error)
+	Pull(ctx context.Context, key string) (State, error)
 }

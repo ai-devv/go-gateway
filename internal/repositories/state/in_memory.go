@@ -1,6 +1,7 @@
 package state
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"sync"
@@ -10,7 +11,7 @@ type InMemory struct {
 	m *sync.Map
 }
 
-func (im *InMemory) Save(key string, state State) error {
+func (im *InMemory) Save(_ context.Context, key string, state State) error {
 	stateBytes, err := json.Marshal(state)
 
 	if err != nil {
@@ -22,7 +23,7 @@ func (im *InMemory) Save(key string, state State) error {
 	return nil
 }
 
-func (im *InMemory) Pull(key string) (State, error) {
+func (im *InMemory) Pull(_ context.Context, key string) (State, error) {
 	rawState, ok := im.m.Load(key)
 
 	if !ok {

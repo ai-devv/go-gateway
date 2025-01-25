@@ -7,7 +7,7 @@ import (
 
 func (c *Controller) Callback(w http.ResponseWriter, r *http.Request) {
 	stateId := r.URL.Query().Get("state")
-	state, err := c.sr.Pull(stateId)
+	state, err := c.sr.Pull(r.Context(), stateId)
 
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)

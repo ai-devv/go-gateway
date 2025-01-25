@@ -47,7 +47,7 @@ func (c *Controller) Authorize(w http.ResponseWriter, r *http.Request) {
 
 	authorizeUrl.RawQuery = authorizeUrlQuery.Encode()
 
-	err = c.sr.Save(stateId, state.State{
+	err = c.sr.Save(r.Context(), stateId, state.State{
 		"redirectUrl": authorizeUrlRedirectUrl,
 		"state":       authorizeUrlState,
 	})

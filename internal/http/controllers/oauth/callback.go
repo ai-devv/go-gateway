@@ -16,9 +16,8 @@ func (c *Controller) Callback(w http.ResponseWriter, r *http.Request) {
 	}
 
 	query := r.URL.Query()
-	originalState, ok := state["state"]
 
-	if ok {
+	if originalState := state["state"]; originalState != "" {
 		query.Set("state", originalState.(string))
 	} else {
 		query.Del("state")

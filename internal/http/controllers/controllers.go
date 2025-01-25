@@ -6,11 +6,11 @@ import (
 )
 
 type Controllers struct {
-	OAuthController *oauth.Controller
+	OAuth *oauth.Controller
 }
 
 func New(sr state.Repository) *Controllers {
 	return &Controllers{
-		OAuthController: oauth.NewOAuthController(sr),
+		OAuth: oauth.NewController(sr),
 	}
 }

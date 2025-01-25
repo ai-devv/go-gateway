@@ -8,7 +8,7 @@ type Controller struct {
 	sr state.Repository
 }
 
-func NewOAuthController(sr state.Repository) *Controller {
+func NewController(sr state.Repository) *Controller {
 	return &Controller{
 		sr,
 	}

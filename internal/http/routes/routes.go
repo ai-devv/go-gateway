@@ -21,8 +21,8 @@ func Register(
 	// ===== authorize =====
 	r.
 		With(middlewares.Authenticate(tr)).
-		Post("/oauth/authorize", c.OAuthController.Authorize)
+		Post("/oauth/authorize", c.OAuth.Authorize)
 
 	// ===== callback =====
-	r.Get("/oauth/callback", c.OAuthController.Callback)
+	r.Get("/oauth/callback", c.OAuth.Callback)
 }

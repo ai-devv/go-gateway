@@ -9,7 +9,7 @@ import (
 	"net/url"
 )
 
-func (oc *Controller) Authorize(w http.ResponseWriter, r *http.Request) {
+func (c *Controller) Authorize(w http.ResponseWriter, r *http.Request) {
 	var jsonBody map[string]any
 
 	if err := json.NewDecoder(r.Body).Decode(&jsonBody); err != nil {
@@ -47,7 +47,7 @@ func (oc *Controller) Authorize(w http.ResponseWriter, r *http.Request) {
 
 	authorizeUrl.RawQuery = authorizeUrlQuery.Encode()
 
-	err = oc.sr.Save(stateId, state.State{
+	err = c.sr.Save(stateId, state.State{
 		"redirectUrl": authorizeUrlRedirectUrl,
 		"state":       authorizeUrlState,
 	})

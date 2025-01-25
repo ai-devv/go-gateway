@@ -5,9 +5,9 @@ import (
 	"net/http"
 )
 
-func (oc *Controller) Callback(w http.ResponseWriter, r *http.Request) {
+func (c *Controller) Callback(w http.ResponseWriter, r *http.Request) {
 	stateId := r.URL.Query().Get("state")
-	state, err := oc.sr.Pull(stateId)
+	state, err := c.sr.Pull(stateId)
 
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)

@@ -9,16 +9,8 @@ import (
 func Authenticate(tr tokens.Repository) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			authorizationHeader, ok := r.Header["Authorization"]
-
-			if !ok {
-				w.WriteHeader(http.StatusUnauthorized)
-
-				return
-			}
-
-			bearerMatcher := regexp.MustCompile(`^Bearer\s(.*)$`)
-			matches := bearerMatcher.FindStringSubmatch(authorizationHeader[0])
+			authorizationHeader := r.Header.Get("authorization")
+			matches := regexp.MustCompile(`^Bearer\s(.*)$`).FindStringSubmatch(authorizationHeader)
 
 			if len(matches) < 2 {
 				w.WriteHeader(http.StatusUnauthorized)
